@@ -34,6 +34,12 @@ public class ComidaController {
         return ResponseEntity.ok(comidaService.buscarTodas());
     }
 
+    // GET por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<ComidaResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(comidaService.buscarPorId(id));
+    }
+
     // GET por NOME
     @GetMapping("/nome/{nome}")
     public ResponseEntity<ComidaResponseDTO> buscarPorNome(@PathVariable String nome) {
@@ -46,6 +52,13 @@ public class ComidaController {
             @PathVariable Long id,
             @Valid @RequestBody ComidaRequestDTO dto) {
         return ResponseEntity.ok(comidaService.atualizarPorId(id, dto));
+    }
+
+    // DELETE por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPorId(@PathVariable Long id) {
+        comidaService.deletarPorId(id);
+        return ResponseEntity.noContent().build();
     }
 
     // DELETE por NOME

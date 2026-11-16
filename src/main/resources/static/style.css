@@ -1,0 +1,102 @@
+/* Casa Jabuti: paleta
+   Tinta marinha #12303A (texto, cabeçalho)
+   Névoa        #EDF2F1 (fundo)
+   Pimenta rosa #A8324F (preço, ação principal)
+   Azulejo      #1F6F8B (foco, detalhes)
+   Pedra        #4A5F67 (texto secundário) */
+:root {
+  --tinta: #12303a;
+  --nevoa: #edf2f1;
+  --papel: #fbfdfc;
+  --pimenta: #a8324f;
+  --azulejo: #1f6f8b;
+  --pedra: #4a5f67;
+  --linha: #9db0b5;
+  --serif: "Young Serif", Georgia, "Times New Roman", serif;
+  --sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--nevoa); color: var(--tinta); font: 1rem/1.5 var(--sans); }
+
+/* Cabeçalho */
+.casa { background: var(--tinta); color: #f2f7f6; padding: 2.5rem 1rem 2rem; }
+.casa-miolo { max-width: 1100px; margin: 0 auto; }
+.casa-nome { margin: 0; font: clamp(2.6rem, 9vw, 5rem)/1 var(--serif); }
+.casa-frase { margin: .8rem 0 0; max-width: 34rem; color: #c9dbd8; font-size: 1.1rem; }
+
+/* Mensagens */
+#mensagem:empty { display: none; }
+#mensagem { max-width: 1100px; width: calc(100% - 2rem); margin: 1rem auto 0; padding: .7rem 1rem; border-left: 5px solid; background: var(--papel); }
+#mensagem.ok { border-color: var(--azulejo); }
+#mensagem.erro { border-color: var(--pimenta); color: #7d1f37; font-weight: 600; }
+
+/* Estrutura */
+.pagina { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 4rem; display: grid; gap: 2.5rem; }
+@media (min-width: 900px) {
+  .pagina { grid-template-columns: minmax(0, 1fr) 21rem; align-items: start; }
+  .cozinha { position: sticky; top: 1rem; }
+}
+.titulo-pagina { margin: 0 0 1rem; font: 1.6rem/1.2 var(--serif); }
+
+/* Filtros */
+.filtros { display: flex; flex-wrap: wrap; gap: .8rem 1rem; align-items: flex-end; padding-bottom: 1.2rem; border-bottom: 2px solid var(--tinta); }
+.campo { flex: 1 1 11rem; min-width: 0; }
+.campo-busca { flex-basis: 14rem; }
+.campo label { margin-top: 0; }
+
+/* Formulário e controles */
+label { display: block; margin: .8rem 0 .25rem; font-weight: 600; }
+label.inline { display: flex; gap: .5rem; align-items: center; }
+input[type=text], input[type=number], select, textarea {
+  width: 100%; padding: .55rem .6rem; font: inherit; color: var(--tinta);
+  background: var(--papel); border: 1.5px solid var(--pedra); border-radius: 3px;
+}
+input[type=checkbox] { width: 1.15rem; height: 1.15rem; accent-color: var(--azulejo); }
+button {
+  padding: .55rem 1rem; font: inherit; font-weight: 600; cursor: pointer; color: var(--tinta);
+  background: transparent; border: 1.5px solid var(--tinta); border-radius: 3px;
+  transition: background-color .15s, color .15s, transform .1s;
+}
+button:hover { background: var(--tinta); color: #fff; }
+button:active { transform: translateY(1px); }
+button.primario { background: var(--pimenta); border-color: var(--pimenta); color: #fff; }
+button.primario:hover { background: #7f2339; border-color: #7f2339; }
+.botoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.filtros .botoes { margin-top: 0; }
+:focus-visible { outline: 3px solid var(--azulejo); outline-offset: 2px; }
+
+/* Cozinha */
+.cozinha { background: var(--papel); border: 1.5px solid var(--tinta); border-radius: 3px; padding: 1.2rem; }
+.cozinha h2 { margin: 0; font: 1.35rem/1.25 var(--serif); overflow-wrap: anywhere; }
+.cozinha-nota { margin: .3rem 0 0; color: var(--pedra); font-size: .95rem; }
+
+/* O cardápio: categoria em destaque e nome ligado ao preço por pontilhado */
+.categoria { margin-top: 2.2rem; }
+.categoria-titulo {
+  display: flex; align-items: baseline; gap: .8rem; margin: 0 0 .6rem;
+  font: clamp(2rem, 6vw, 3.2rem)/1.05 var(--serif); color: var(--tinta);
+}
+.categoria-qtd { font: 600 1rem var(--sans); color: var(--pedra); }
+.itens { list-style: none; margin: 0; padding: 0; }
+.item { padding: .9rem 0; border-top: 1px solid var(--linha); }
+.item:last-child { border-bottom: 1px solid var(--linha); }
+.linha { display: flex; align-items: baseline; gap: .5rem; }
+.item-nome { font-size: 1.2rem; font-weight: 700; overflow-wrap: anywhere; }
+.pontos { flex: 1 1 1rem; min-width: 1rem; border-bottom: 3px dotted var(--pedra); transform: translateY(-.2em); }
+.item-preco { font: 1.25rem var(--serif); color: var(--pimenta); white-space: nowrap; }
+.item-descricao { margin: .2rem 0 0; color: var(--pedra); max-width: 40rem; overflow-wrap: anywhere; }
+.item-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: .6rem; }
+.tempo { color: var(--pedra); font-size: .95rem; }
+.esgotado { padding: .1rem .55rem; border: 1.5px solid var(--pimenta); color: #7d1f37; font-weight: 700; font-size: .9rem; border-radius: 3px; }
+.item.indisponivel .item-nome { color: var(--pedra); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.item.indisponivel .item-preco { color: var(--pedra); }
+.acoes { margin-left: auto; display: flex; gap: .4rem; }
+.acoes button { padding: .3rem .7rem; font-size: .92rem; }
+.acoes .excluir { border-color: var(--pimenta); color: #7d1f37; }
+.acoes .excluir:hover { background: #7f2339; color: #fff; }
+.vazio { margin-top: 2rem; color: var(--pedra); font-size: 1.1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

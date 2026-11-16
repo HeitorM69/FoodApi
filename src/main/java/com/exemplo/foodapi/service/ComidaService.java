@@ -39,6 +39,13 @@ public class ComidaService {
                 .toList();
     }
 
+    // Buscar pelo ID
+    public ComidaResponseDTO buscarPorId(Long id) {
+        Comida comida = comidaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item de comida não encontrado com ID: " + id));
+        return ComidaResponseDTO.fromEntity(comida);
+    }
+
     // Buscar pelo NOME
     public ComidaResponseDTO buscarPorNome(String nome) {
         Comida comida = comidaRepository.findByNomeIgnoreCase(nome)
@@ -71,6 +78,14 @@ public class ComidaService {
 
         Comida atualizada = comidaRepository.save(comida);
         return ComidaResponseDTO.fromEntity(atualizada);
+    }
+
+    // Deletar pelo ID
+    @Transactional
+    public void deletarPorId(Long id) {
+        Comida comida = comidaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item de comida não encontrado com ID: " + id));
+        comidaRepository.delete(comida);
     }
 
     // Deletar pelo NOME
